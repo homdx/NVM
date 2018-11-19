@@ -14,7 +14,7 @@ Builder.load_file('template.kv')
 
 
 def connect_db():
-    return pymysql.connect(host = '52.59.193.99', user = 'nvm', password = 'nvm', db = 'nvm', charset = 'utf8')
+    return pymysql.connect(host = '52.58.142.131', user = 'nvm', password = 'nvm', db = 'nvm', charset = 'utf8')
 
 
 class LoginScreen(Screen):
