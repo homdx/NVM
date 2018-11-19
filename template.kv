@@ -1,0 +1,124 @@
+<LoginScreen>:
+    name: 'login'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .5, .5
+            spacing: 5
+            Label: 
+                markup: True
+                text: '[size=24]Введите [color=dd88ff]логин и пароль[/color][/size]'
+            TextInput:
+                id: idlogin
+                multiline: False
+            TextInput:
+                id: idpassword
+                password: True
+                multiline: False
+            Button:
+                text: 'Войти'
+                background_color: (1.0, 0.0, 0.0, 1.0)
+                on_release: root.verify_credentials(idlogin.text, idpassword.text)
+            Label:
+                id: idsuccess
+                size_hint:(4,2)
+                color: (1,0,0,1)
+                font_size: 20
+                text_size: self.size
+                valign: "middle"
+        
+
+<SearchScreen>:
+    name: 'search'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: .5, .5
+            spacing: 5
+            Label: 
+                markup: True
+                text: '[size=24]Введите [color=dd88ff]данные для поиска:[/color][/size]'
+            TextInput:
+                id: iddate
+                bind: root.date()
+                multiline: False
+            TextInput:
+                id: iddestination
+                text: 'Введите место назначения'
+                multiline: False    
+            Spinner:
+                id: idautotype
+                text: 'Выберите тип автотранспорта:'
+                values: ('Погрузчик', 'Газель', 'Легковое авто')
+            Button:
+                text: 'Искать'
+                background_color: (1.0, 0.0, 0.0, 1.0)
+                on_release: root.search_auto(iddate.text, iddestination.text, idautotype.text)
+            Label:
+                id: idsuccess
+                size_hint:(4,2)
+                color: (1,0,0,1)
+                font_size: 20
+                text_size: self.size
+                valign: "middle"
+         
+            
+<ResultScreen>:
+    name: 'result'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        BoxLayout:
+            id: idbox
+            orientation: 'vertical'
+            size_hint: .7, .7
+            spacing: 0
+            Label: 
+                markup: True
+                text: '[size=24]Доступный [color=dd88ff]транспорт:[/color][/size]'
+            Label:
+                id: idtextresult
+                markup: True
+                text: 'Ничего [color=dd88ff]не найдено[/color]'
+                multiline: True
+
+
+<StatusScreen>:
+    name: 'status'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        BoxLayout:
+            size_hint: 1, .05
+            Label: 
+                markup: True
+                text: '[size=24]Ваши [color=dd88ff]заказы:[/color][/size]'
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        GridLayout:
+            id: idstatusgrid
+            cols: 2
+            size_hint: 1, .85
+            spacing: 0
+            Label:
+                id: idstatustext
+                markup: True
+                text: 'Здесь отображаются [color=dd88ff]ваши заявки[/color]'
+                multiline: True
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: 1, .1
+            Button:
+                text: 'Сделать еще заказ'
+                on_release: root.manager.current = 'search'
+            Button:
+                text: 'Выйти из приложения'
+                on_release: app.stop()
